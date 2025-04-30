@@ -1,0 +1,6 @@
+@ClothingECommerce_HostAddress = http://localhost:5107
+
+GET {{ClothingECommerce_HostAddress}}
+Accept: application/json
+
+###
