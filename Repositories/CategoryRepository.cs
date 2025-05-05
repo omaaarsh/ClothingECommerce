@@ -42,7 +42,7 @@ namespace ClothingECommerce.Repositories
         /// </remarks>
         public async Task<List<Category>> GetAllAsync()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.categories.ToListAsync();
         }
     }
 }

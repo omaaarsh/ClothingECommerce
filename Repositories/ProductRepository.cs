@@ -39,7 +39,7 @@ namespace ClothingECommerce.Repositories
         /// <returns>A Task containing a List of Product objects, representing the matching products.</returns>
         public async Task<List<Product>> GetAllAsync(int? categoryId = null)
         {
-            var query = _context.Products.AsQueryable();
+            var query = _context.products.AsQueryable();
             if (categoryId.HasValue)
             {
                 query = query.Where(p => p.CategoryID == categoryId.Value);
@@ -54,7 +54,7 @@ namespace ClothingECommerce.Repositories
         /// <returns>A Task containing the Product object if found, or null if no product matches the ID.</returns>
         public async Task<Product?> GetByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
+            return await _context.products.FindAsync(id);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace ClothingECommerce.Repositories
         /// <returns>A Task containing a List of Product objects representing men's clothing products.</returns>
         public async Task<List<Product>> GetMenProductsAsync()
         {
-            return await _context.Products.Where(p => p.CategoryID == 1).ToListAsync();
+            return await _context.products.Where(p => p.CategoryID == 1).ToListAsync();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace ClothingECommerce.Repositories
         /// <returns>A Task containing a List of Product objects representing women's clothing products.</returns>
         public async Task<List<Product>> GetWomenProductsAsync()
         {
-            return await _context.Products.Where(p => p.CategoryID == 2).ToListAsync();
+            return await _context.products.Where(p => p.CategoryID == 2).ToListAsync();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace ClothingECommerce.Repositories
         /// <returns>A Task containing a List of Product objects representing kids' clothing products.</returns>
         public async Task<List<Product>> GetKidsProductsAsync()
         {
-            return await _context.Products.Where(p => p.CategoryID == 3).ToListAsync();
+            return await _context.products.Where(p => p.CategoryID == 3).ToListAsync();
         }
     }
 }

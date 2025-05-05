@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace ClothingECommerce.Controllers // Defines the namespace for controller classes, organizing the AccountController in the application.
+namespace WearlyEcommerce.Controllers // Defines the namespace for controller classes, organizing the AccountController in the application.
 {
     /// <summary>
     /// Handles HTTP requests related to user account operations, such as login, logout, registration, and authentication status checks.

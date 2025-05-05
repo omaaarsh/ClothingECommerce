@@ -69,15 +69,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
             maxRetryDelay: TimeSpan.FromSeconds(30),  // Delay between retries
             errorNumbersToAdd: null)      // Specific SQL error codes to retry
     ));
+    
 
-// Register application services with scoped lifetime
-// - Created once per client request
-builder.Services.AddScoped<IProductService,ProductService>();    // Handles product CRUD operations
-builder.Services.AddScoped<ICategoryService,CategoryService>();   // Manages product categories
-builder.Services.AddScoped<ICustomerService,CustomerService>(); // Manages user accounts/authentication
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>(); // Handles customer data access
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // Handles product categories data access
-builder.Services.AddScoped<IProductRepository,ProductRepository>(); // Handles product data access
+// Register Repositories
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+// Register Services
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 /*******************************************
  * SECURITY CONFIGURATION SECTION

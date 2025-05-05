@@ -46,7 +46,7 @@ namespace ClothingECommerce.Services
             {
                 new Claim(ClaimTypes.Name, customer.Name),
                 new Claim(ClaimTypes.Email, customer.Email),
-                new Claim(ClaimTypes.NameIdentifier, customer.ID.ToString())
+                new Claim(ClaimTypes.NameIdentifier, customer.CustomerID.ToString())
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -74,7 +74,7 @@ namespace ClothingECommerce.Services
             {
                 new Claim(ClaimTypes.Name, customer.Name),
                 new Claim(ClaimTypes.Email, customer.Email),
-                new Claim(ClaimTypes.NameIdentifier, customer.ID.ToString())
+                new Claim(ClaimTypes.NameIdentifier, customer.CustomerID.ToString())
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

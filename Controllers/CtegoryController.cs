@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace ClothingECommerce.Controllers
+namespace WearlyEcommerce.Controllers
 {
     /// <summary>
     /// Handles HTTP requests related to product categories, such as retrieving category data.

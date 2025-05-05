@@ -16,12 +16,12 @@ namespace ClothingECommerce.Repositories
 
         public async Task<Customer> GetByEmailAsync(string email)
         {
-            return await _context.Customers.FirstOrDefaultAsync(c => c.Email == email);
+            return await _context.customers.FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public async Task AddAsync(Customer customer)
         {
-            await _context.Customers.AddAsync(customer);
+            await _context.customers.AddAsync(customer);
             await _context.SaveChangesAsync();
         }
     }

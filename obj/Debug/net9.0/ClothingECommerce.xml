@@ -4,234 +4,6 @@
         <name>ClothingECommerce</name>
     </assembly>
     <members>
-        <member name="T:ClothingECommerce.Controllers.CategoriesController">
-            <summary>
-            Handles HTTP requests related to product categories, such as retrieving category data.
-            </summary>
-            <remarks>
-            This controller interacts with the ICategoryService to perform business logic for category operations.
-            It uses the allow-frontend CORS policy to allow requests from the frontend (e.g., http://localhost:3000).
-            The controller is registered in Program.cs for dependency injection and supports API versioning with the 'api/v1' prefix.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.CategoriesController.#ctor(ClothingECommerce.Services.ICategoryService)">
-            <summary>
-            Initializes a new instance of the CategoriesController with dependency injection.
-            </summary>
-            <param name="categoryService">The ICategoryService instance for handling category-related business logic.</param>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.CategoriesController.GetAll">
-            <summary>
-            Retrieves all product categories.
-            </summary>
-            <returns>
-            A Task containing an IActionResult with a JSON response of all categories.
-            </returns>
-            <remarks>
-            This method calls ICategoryService.GetAll to fetch category data and returns it in JSON format.
-            Accessible via GET /api/v1/categories.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Controllers.AccountController">
-            <summary>
-            Handles HTTP requests related to user account operations, such as login, logout, registration, and authentication status checks.
-            </summary>
-            <remarks>
-            This controller interacts with the ICustomerService to perform business logic for account operations.
-            It uses cookie-based authentication to manage user sessions and is configured with CORS to allow requests from the frontend.
-            The controller is registered in Program.cs for dependency injection and uses logging for request tracking and error reporting.
-            API versioning is implemented with the 'api/v1' prefix to support future updates without breaking existing clients.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.#ctor(ClothingECommerce.Services.ICustomerService,Microsoft.Extensions.Logging.ILogger{ClothingECommerce.Controllers.AccountController})">
-            <summary>
-            Initializes a new instance of the AccountController with dependency injection.
-            </summary>
-            <param name="customerService">The ICustomerService instance for handling customer-related business logic.</param>
-            <param name="logger">The ILogger instance for logging request and error information.</param>
-            <remarks>
-            The constructor uses dependency injection to receive the ICustomerService and ILogger instances.
-            These are stored for use in controller methods to process requests and log events.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.Login(ClothingECommerce.Models.LoginModel)">
-            <summary>
-            Authenticates a user based on their login credentials and signs them in using cookie authentication.
-            </summary>
-            <param name="model">The LoginModel containing the email, password, and optional RememberMe flag.</param>
-            <returns>
-            A Task containing an IActionResult with a JSON response indicating login success or failure.
-            </returns>
-            <exception cref="T:System.UnauthorizedAccessException">Thrown if the email or password is invalid.</exception>
-            <exception cref="T:System.Exception">Thrown for unexpected errors during sign-in.</exception>
-            <remarks>
-            This method validates the input model, calls ICustomerService.AuthenticateAsync to verify credentials,
-            and signs in the user using cookie authentication. It logs request outcomes and errors for debugging.
-            The endpoint is accessible anonymously to allow unauthenticated users to log in.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.Logout">
-            <summary>
-            Signs out the current user and clears their authentication cookie.
-            </summary>
-            <returns>
-            A Task containing an IActionResult with a JSON response indicating logout success.
-            </returns>
-            <remarks>
-            This method calls HttpContext.SignOutAsync to remove the authentication cookie and logs the event.
-            It is accessible to authenticated users and returns a success message upon completion.
-            Uses POST to align with REST conventions for state-changing operations.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.CheckAuth">
-            <summary>
-            Checks the authentication status of the current user and returns their details if authenticated.
-            </summary>
-            <returns>
-            A Task containing an IActionResult with a JSON response indicating authentication status and user details.
-            </returns>
-            <remarks>
-            This method checks if the user is authenticated via User.Identity.IsAuthenticated and retrieves claims
-            (e.g., name, email, ID) if authenticated. It logs request details and user information for debugging.
-            The endpoint is accessible anonymously to allow clients to check authentication status.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.DebugCookie">
-            <summary>
-            Returns debugging information about the current request's cookies and authentication status.
-            </summary>
-            <returns>
-            An IActionResult with a JSON response containing cookie details and authentication status.
-            </returns>
-            <remarks>
-            This method retrieves all cookies from the request and checks User.Identity.IsAuthenticated.
-            It is used for debugging authentication issues and is accessible anonymously.
-            The response includes a list of cookies and the authentication status for diagnostic purposes.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.AccountController.SignUp(ClothingECommerce.Models.SignUp)">
-            <summary>
-            Registers a new customer and signs them in using cookie authentication.
-            </summary>
-            <param name="model">The SignUp model containing customer registration details (e.g., name, email, password).</param>
-            <returns>
-            A Task containing an IActionResult with a JSON response indicating signup success or failure.
-            </returns>
-            <exception cref="T:System.InvalidOperationException">Thrown if the email is already registered.</exception>
-            <exception cref="T:System.Exception">Thrown for unexpected errors during registration or sign-in.</exception>
-            <remarks>
-            This method validates the input model, calls ICustomerService.SignUpAsync to register the customer,
-            and signs in the user using cookie authentication. It logs request outcomes and errors for debugging.
-            The endpoint is accessible anonymously to allow new users to register.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Controllers.ProductsController">
-            <summary>
-            Handles HTTP requests related to products, such as retrieving product data.
-            </summary>
-            <remarks>
-            This controller interacts with the IProductService to perform business logic for product operations.
-            It uses the allow-frontend CORS policy to allow requests from the frontend (e.g., http://localhost:3000).
-            The controller is registered in Program.cs for dependency injection and supports API versioning with the 'api/v1' prefix.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.#ctor(ClothingECommerce.Services.IProductService)">
-            <summary>
-            Initializes a new instance of the ProductsController with dependency injection.
-            </summary>
-            <param name="productService">The IProductService instance for handling product-related business logic.</param>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.GetAll(System.Nullable{System.Int32})">
-            <summary>
-            Retrieves all products, optionally filtered by category.
-            </summary>
-            <param name="categoryId">Optional category ID to filter products.</param>
-            <returns>A Task containing an IActionResult with a JSON response of matching products.</returns>
-            <remarks>
-            Accessible via GET /api/v1/products or GET /api/v1/products?categoryId={id}.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.GetById(System.Int32)">
-            <summary>
-            Retrieves a single product by its ID.
-            </summary>
-            <param name="id">The ID of the product to retrieve.</param>
-            <returns>A Task containing an IActionResult with the product in JSON format, or 404 if not found.</returns>
-            <remarks>
-            Accessible via GET /api/v1/products/{id}.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.GetMenProducts">
-            <summary>
-            Retrieves products categorized as men's clothing.
-            </summary>
-            <returns>A Task containing an IActionResult with a JSON response of men's products.</returns>
-            <remarks>
-            Accessible via GET /api/v1/products/men.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.GetWomenProducts">
-            <summary>
-            Retrieves products categorized as women's clothing.
-            </summary>
-            <returns>A Task containing an IActionResult with a JSON response of women's products.</returns>
-            <remarks>
-            Accessible via GET /api/v1/products/women.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Controllers.ProductsController.GetKidsProducts">
-            <summary>
-            Retrieves products categorized as kids' clothing.
-            </summary>
-            <returns>A Task containing an IActionResult with a JSON response of kids' products.</returns>
-            <remarks>
-            Accessible via GET /api/v1/products/kids.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Data.AppDbContext">
-            <summary>
-            Represents the database context for the e-commerce application, providing access to Categories, Products, and Customers tables.
-            </summary>
-            <remarks>
-            This class inherits from DbContext and is used by Entity Framework Core to interact with the SQL Server database.
-            It defines DbSets for Categories, Products, and Customers, and configures entity mappings and seed data.
-            The context is registered in Program.cs with a SQL Server connection string for dependency injection.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Data.AppDbContext.Categories">
-            <summary>
-            Gets or sets the DbSet for the Categories table, representing product categories.
-            </summary>
-            <remarks>
-            This DbSet allows querying and manipulating category data, used by CategoryService to fetch categories.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Data.AppDbContext.Products">
-            <summary>
-            Gets or sets the DbSet for the Products table, representing products in the e-commerce catalog.
-            </summary>
-            <remarks>
-            This DbSet allows querying and manipulating product data, used by ProductService to fetch products.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Data.AppDbContext.Customers">
-            <summary>
-            Gets or sets the DbSet for the Customers table, representing registered customers.
-            </summary>
-            <remarks>
-            This DbSet allows querying and manipulating customer data, used by CustomerService for authentication and profile management.
-            </remarks>
-        </member>
-        <member name="M:ClothingECommerce.Data.AppDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{ClothingECommerce.Data.AppDbContext})">
-            <summary>
-            Initializes a new instance of the AppDbContext with the specified options.
-            </summary>
-            <param name="options">The DbContextOptions containing configuration details, such as the database connection string.</param>
-            <remarks>
-            The constructor passes the options to the base DbContext class, enabling database configuration (e.g., SQL Server connection).
-            The options are configured in Program.cs with the connection string from appsettings.json.
-            </remarks>
-        </member>
         <member name="T:ClothingECommerce.Data.AppDbContextFactory">
             <summary>
             A factory class for creating instances of AppDbContext at design time, used by Entity Framework Core tools.
@@ -269,382 +41,7 @@
         <member name="M:ClothingECommerce.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:ClothingECommerce.Migrations.AddSeedData">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateProductSchema">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateProductSchema.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateProductSchema.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateProductSchema.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.NewMigrationName">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.NewMigrationName.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.NewMigrationName.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.NewMigrationName.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateDataBase">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateDataBase.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateDataBase.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateDataBase.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.SeedProducts">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProducts.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProducts.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProducts.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.SeedProduct">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProduct.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProduct.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.SeedProduct.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.fixLink">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLink.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLink.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLink.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.fix_Link">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix_Link.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix_Link.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix_Link.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.fixLinks">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLinks.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLinks.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLinks.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.fixLin">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLin.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLin.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fixLin.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.fix">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.fix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.newData">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.newData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.newData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.newData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.lastFixInSha2aAlla">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixInSha2aAlla.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixInSha2aAlla.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixInSha2aAlla.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.lastFixo">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixo.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixo.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.lastFixo.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.AddCustomerPasswordLengthConstraint">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPasswordLengthConstraint.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPasswordLengthConstraint.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPasswordLengthConstraint.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.AddCustomerPhoneConst">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPhoneConst.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPhoneConst.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPhoneConst.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.AddCustomer">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomer.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomer.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomer.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.AddCustomerPHNO">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPHNO.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPHNO.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.AddCustomerPHNO.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateCustomerSeedData">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerSeedData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerSeedData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerSeedData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateCustomerPhoneConst">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhoneConst.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhoneConst.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhoneConst.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateCustomerPhone">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhone.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhone.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhone.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateCustomer">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomer.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomer.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomer.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateCustomerPhones">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhones.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhones.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateCustomerPhones.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.Update">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.Update.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.Update.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.Update.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Migrations.UpdateEntityIds">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateEntityIds.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateEntityIds.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:ClothingECommerce.Migrations.UpdateEntityIds.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:ClothingECommerce.Models.Category">
-            <summary>
-            Represents a product category in the e-commerce application, such as Men's, Women's, or Kids' clothing.
-            </summary>
-            <remarks>
-            This class is used as a model for storing category data in the database via Entity Framework Core.
-            It includes properties for ID, Name, and a navigation property for related Products.
-            The model is mapped to the Categories table and used in category-related operations, such as filtering products or populating navigation menus.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Category.Name">
-            <summary>
-            Gets or sets the name of the category.
-            </summary>
-            <remarks>
-            This property stores the category's name (e.g., "Man", "Women", "Kid").
-            It is displayed on the frontend in navigation menus, dropdowns, or product filters.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Category.Products">
-            <summary>
-            Gets or sets the collection of products associated with the category.
-            </summary>
-            <remarks>
-            This navigation property represents the one-to-many relationship between a category and its products.
-            It allows Entity Framework Core to load related Product entities when querying categories.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Models.ComplexPasswordAttribute">
-            <summary>
-            Validates that a password meets complexity requirements, including length and character type constraints.
-            </summary>
-        </member>
-        <member name="M:ClothingECommerce.Models.ComplexPasswordAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
-            <summary>
-            Validates the password against complexity requirements.
-            </summary>
-            <param name="value">The password to validate, expected to be a string.</param>
-            <param name="validationContext">The context providing metadata about the validation process.</param>
-            <returns>
-            Returns ValidationResult.Success if the password is valid, or a ValidationResult with an error message if invalid.
-            </returns>
-            <remarks>
-            The password must be 6-100 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.
-            This attribute is applied to the Password property of the Customer class to ensure secure passwords in the e-commerce application.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Models.PhoneNumberFormatAttribute">
-            <summary>
-            Validates that a phone number is exactly 11 digits.
-            </summary>
-        </member>
-        <member name="M:ClothingECommerce.Models.PhoneNumberFormatAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
-            <summary>
-            Validates the phone number against the required format.
-            </summary>
-            <param name="value">The phone number to validate, expected to be a string.</param>
-            <param name="validationContext">The context providing metadata about the validation process.</param>
-            <returns>
-            Returns ValidationResult.Success if the phone number is valid, or a ValidationResult with an error message if invalid.
-            </returns>
-            <remarks>
-            The phone number must be exactly 11 digits (no other characters allowed).
-            This attribute is applied to the PhoneNo property of the Customer class to ensure valid phone numbers in the e-commerce application.
-            </remarks>
-        </member>
-        <member name="T:ClothingECommerce.Models.Customer">
-            <summary>
-            Represents a customer in the e-commerce application, including their personal details and validation rules.
-            </summary>
-            <remarks>
-            This class is used as a model for storing customer data in the database via Entity Framework Core.
-            It includes properties for ID, Name, Email, Password, and PhoneNo, each with validation attributes to ensure data integrity.
-            The model is mapped to a database table and used in customer-related operations, such as registration and profile management.
-            </remarks>
-        </member>
+        <!-- Badly formed XML comment ignored for member "T:ClothingECommerce.Models.ComplexPasswordAttribute" -->
         <member name="P:ClothingECommerce.Models.LoginModel.RememberMe">
             <summary>
             Gets or sets a flag indicating whether the user wants to stay logged in across sessions.
@@ -654,59 +51,13 @@
             This property is used to configure the cookie's persistence in the AccountController.
             </remarks>
         </member>
-        <member name="T:ClothingECommerce.Models.Product">
+        <member name="T:ClothingECommerce.Models.PhoneNumberFormatAttribute">
             <summary>
-            Represents a product in the e-commerce application, including details such as name, price, and category.
+            Custom validation attribute to ensure the phone number is exactly 11 digits.
             </summary>
             <remarks>
-            This class is used as a model for storing product data in the database via Entity Framework Core.
-            It includes properties for ID, Name, Price, Image, CategoryID, Quantity, and Description, with validation and foreign key constraints.
-            The model is mapped to a database table and used in product-related operations, such as displaying products on the frontend.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Product.Name">
-            <summary>
-            Gets or sets the name of the product.
-            </summary>
-            <remarks>
-            This property stores the product's name (e.g., "Boxy Fit Crew Neck Printed Sweatshirt").
-            It is displayed on the frontend in product listings and details pages.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Product.Price">
-            <summary>
-            Gets or sets the price of the product.
-            </summary>
-            <remarks>
-            This property stores the product's price in decimal format (e.g., 1199.00 EGP).
-            It is used for display and calculations in the e-commerce application, such as cart totals.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Product.Image">
-            <summary>
-            Gets or sets the path to the product's image.
-            </summary>
-            <remarks>
-            This property stores the relative path to the product's image (e.g., "./photos/man/Boxy Fit Crew Neck Printed Sweatshirt 1199 EGP.avif").
-            It is used to display the product image on the frontend.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Product.Quantity">
-            <summary>
-            Gets or sets the available quantity of the product in stock.
-            </summary>
-            <remarks>
-            This property tracks the number of units available for sale (e.g., 50).
-            It is used to manage inventory and prevent overselling in the e-commerce application.
-            </remarks>
-        </member>
-        <member name="P:ClothingECommerce.Models.Product.Description">
-            <summary>
-            Gets or sets the description of the product.
-            </summary>
-            <remarks>
-            This property stores a detailed description of the product (e.g., "Effortlessly stylish Boxy Fit Crew Neck Printed Sweatshirt...").
-            It is displayed on the product details page to provide additional information to customers.
+            Validates that the phone number contains only digits and is exactly 11 characters long,
+            aligning with the Customer model's PhoneNo constraints.
             </remarks>
         </member>
         <member name="T:ClothingECommerce.Models.SignUp">
@@ -1061,6 +412,190 @@
             Retrieves products in the kids' clothing category (CategoryID = 3).
             </summary>
             <returns>A Task containing a List of Product objects representing kids' clothing products.</returns>
+        </member>
+        <member name="T:WearlyEcommerce.Controllers.CategoriesController">
+            <summary>
+            Handles HTTP requests related to product categories, such as retrieving category data.
+            </summary>
+            <remarks>
+            This controller interacts with the ICategoryService to perform business logic for category operations.
+            It uses the allow-frontend CORS policy to allow requests from the frontend (e.g., http://localhost:3000).
+            The controller is registered in Program.cs for dependency injection and supports API versioning with the 'api/v1' prefix.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.CategoriesController.#ctor(ClothingECommerce.Services.ICategoryService)">
+            <summary>
+            Initializes a new instance of the CategoriesController with dependency injection.
+            </summary>
+            <param name="categoryService">The ICategoryService instance for handling category-related business logic.</param>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.CategoriesController.GetAll">
+            <summary>
+            Retrieves all product categories.
+            </summary>
+            <returns>
+            A Task containing an IActionResult with a JSON response of all categories.
+            </returns>
+            <remarks>
+            This method calls ICategoryService.GetAll to fetch category data and returns it in JSON format.
+            Accessible via GET /api/v1/categories.
+            </remarks>
+        </member>
+        <member name="T:WearlyEcommerce.Controllers.AccountController">
+            <summary>
+            Handles HTTP requests related to user account operations, such as login, logout, registration, and authentication status checks.
+            </summary>
+            <remarks>
+            This controller interacts with the ICustomerService to perform business logic for account operations.
+            It uses cookie-based authentication to manage user sessions and is configured with CORS to allow requests from the frontend.
+            The controller is registered in Program.cs for dependency injection and uses logging for request tracking and error reporting.
+            API versioning is implemented with the 'api/v1' prefix to support future updates without breaking existing clients.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.#ctor(ClothingECommerce.Services.ICustomerService,Microsoft.Extensions.Logging.ILogger{WearlyEcommerce.Controllers.AccountController})">
+            <summary>
+            Initializes a new instance of the AccountController with dependency injection.
+            </summary>
+            <param name="customerService">The ICustomerService instance for handling customer-related business logic.</param>
+            <param name="logger">The ILogger instance for logging request and error information.</param>
+            <remarks>
+            The constructor uses dependency injection to receive the ICustomerService and ILogger instances.
+            These are stored for use in controller methods to process requests and log events.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.Login(ClothingECommerce.Models.LoginModel)">
+            <summary>
+            Authenticates a user based on their login credentials and signs them in using cookie authentication.
+            </summary>
+            <param name="model">The LoginModel containing the email, password, and optional RememberMe flag.</param>
+            <returns>
+            A Task containing an IActionResult with a JSON response indicating login success or failure.
+            </returns>
+            <exception cref="T:System.UnauthorizedAccessException">Thrown if the email or password is invalid.</exception>
+            <exception cref="T:System.Exception">Thrown for unexpected errors during sign-in.</exception>
+            <remarks>
+            This method validates the input model, calls ICustomerService.AuthenticateAsync to verify credentials,
+            and signs in the user using cookie authentication. It logs request outcomes and errors for debugging.
+            The endpoint is accessible anonymously to allow unauthenticated users to log in.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.Logout">
+            <summary>
+            Signs out the current user and clears their authentication cookie.
+            </summary>
+            <returns>
+            A Task containing an IActionResult with a JSON response indicating logout success.
+            </returns>
+            <remarks>
+            This method calls HttpContext.SignOutAsync to remove the authentication cookie and logs the event.
+            It is accessible to authenticated users and returns a success message upon completion.
+            Uses POST to align with REST conventions for state-changing operations.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.CheckAuth">
+            <summary>
+            Checks the authentication status of the current user and returns their details if authenticated.
+            </summary>
+            <returns>
+            A Task containing an IActionResult with a JSON response indicating authentication status and user details.
+            </returns>
+            <remarks>
+            This method checks if the user is authenticated via User.Identity.IsAuthenticated and retrieves claims
+            (e.g., name, email, ID) if authenticated. It logs request details and user information for debugging.
+            The endpoint is accessible anonymously to allow clients to check authentication status.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.DebugCookie">
+            <summary>
+            Returns debugging information about the current request's cookies and authentication status.
+            </summary>
+            <returns>
+            An IActionResult with a JSON response containing cookie details and authentication status.
+            </returns>
+            <remarks>
+            This method retrieves all cookies from the request and checks User.Identity.IsAuthenticated.
+            It is used for debugging authentication issues and is accessible anonymously.
+            The response includes a list of cookies and the authentication status for diagnostic purposes.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.AccountController.SignUp(ClothingECommerce.Models.SignUp)">
+            <summary>
+            Registers a new customer and signs them in using cookie authentication.
+            </summary>
+            <param name="model">The SignUp model containing customer registration details (e.g., name, email, password).</param>
+            <returns>
+            A Task containing an IActionResult with a JSON response indicating signup success or failure.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">Thrown if the email is already registered.</exception>
+            <exception cref="T:System.Exception">Thrown for unexpected errors during registration or sign-in.</exception>
+            <remarks>
+            This method validates the input model, calls ICustomerService.SignUpAsync to register the customer,
+            and signs in the user using cookie authentication. It logs request outcomes and errors for debugging.
+            The endpoint is accessible anonymously to allow new users to register.
+            </remarks>
+        </member>
+        <member name="T:WearlyEcommerce.Controllers.ProductsController">
+            <summary>
+            Handles HTTP requests related to products, such as retrieving product data.
+            </summary>
+            <remarks>
+            This controller interacts with the IProductService to perform business logic for product operations.
+            It uses the allow-frontend CORS policy to allow requests from the frontend (e.g., http://localhost:3000).
+            The controller is registered in Program.cs for dependency injection and supports API versioning with the 'api/v1' prefix.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.#ctor(ClothingECommerce.Services.IProductService)">
+            <summary>
+            Initializes a new instance of the ProductsController with dependency injection.
+            </summary>
+            <param name="productService">The IProductService instance for handling product-related business logic.</param>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.GetAll(System.Nullable{System.Int32})">
+            <summary>
+            Retrieves all products, optionally filtered by category.
+            </summary>
+            <param name="categoryId">Optional category ID to filter products.</param>
+            <returns>A Task containing an IActionResult with a JSON response of matching products.</returns>
+            <remarks>
+            Accessible via GET /api/v1/products or GET /api/v1/products?categoryId={id}.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.GetById(System.Int32)">
+            <summary>
+            Retrieves a single product by its ID.
+            </summary>
+            <param name="id">The ID of the product to retrieve.</param>
+            <returns>A Task containing an IActionResult with the product in JSON format, or 404 if not found.</returns>
+            <remarks>
+            Accessible via GET /api/v1/products/{id}.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.GetMenProducts">
+            <summary>
+            Retrieves products categorized as men's clothing.
+            </summary>
+            <returns>A Task containing an IActionResult with a JSON response of men's products.</returns>
+            <remarks>
+            Accessible via GET /api/v1/products/men.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.GetWomenProducts">
+            <summary>
+            Retrieves products categorized as women's clothing.
+            </summary>
+            <returns>A Task containing an IActionResult with a JSON response of women's products.</returns>
+            <remarks>
+            Accessible via GET /api/v1/products/women.
+            </remarks>
+        </member>
+        <member name="M:WearlyEcommerce.Controllers.ProductsController.GetKidsProducts">
+            <summary>
+            Retrieves products categorized as kids' clothing.
+            </summary>
+            <returns>A Task containing an IActionResult with a JSON response of kids' products.</returns>
+            <remarks>
+            Accessible via GET /api/v1/products/kids.
+            </remarks>
         </member>
     </members>
 </doc>
