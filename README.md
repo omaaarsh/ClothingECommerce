@@ -8,38 +8,7 @@ This powers our cutting-edge **clothing e-commerce** platform, built with ❤️
 ## 📂 **Project Structure**
 
 📦 Wearly-Backend/
-├── 📁 Controllers/                 → API endpoints (HTTP layer)
-│   ├── 👤 AccountController.cs    → User auth (register, login, logout, profile)
-│   ├── 🛍️ ProductController.cs    → Browse + search products
-│   ├── 🗂️ CategoryController.cs   → View product categories
-│   ├── 🛒 CartController.cs        → Manage shopping cart
-│   ├── ❤️ WishlistController.cs    → Manage wishlist
-│   └── 📦 OrderController.cs       → Place + view orders
-│
-├── 📁 Services/                    → Business logic layer
-│   ├── 📁 Interfaces/              → Service contracts (IAccountService, etc.)
-│   └── 📁 Implementations/         → Service code (AccountService, etc.)
-│
-├── 📁 Repositories/                → Data access layer (repositories)
-│   ├── 📁 Interfaces/              → Repository contracts
-│   └── 📁 Implementations/         → EF Core repo implementations
-│
-├── 📁 Models/                      → Domain models (entities)
-│   ├── 👥 Customer.cs             → User entity
-│   ├── 👗 Product.cs             → Product entity
-│   ├── 🗂️ Category.cs            → Category entity
-│   ├── 🛒 CartItem.cs            → Cart item entity
-│   └── 📦 Order.cs               → Order entity
-│
-├── 📁 Data/                        → Database context + migrations
-│   ├── 📄 AppDbContext.cs        → EF Core DbContext
-│   └── 📁 Migrations/            → Database migrations
-│
-├── 📁 Configurations/              → App configs (CORS, Auth, Swagger)
-├── ⚙️ appsettings.json             → Global settings (DB connection, keys)
-├── 🚀 Program.cs                  → App entry point + middleware
-├── 🐳 Dockerfile                  → SQL Server Docker setup
-└── 📝 README.md                   → This documentation
+![image](https://github.com/user-attachments/assets/d3364a4d-0283-42a1-beaf-599710c8a925)
 
 ---
 
