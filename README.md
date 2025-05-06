@@ -7,40 +7,65 @@ This powers our cutting-edge **clothing e-commerce** platform, built with ❤️
 
 ## 📂 **Project Structure**
 
-📦 Wearly-Backend/
-├── 📁 Controllers/                 → API endpoints (HTTP layer)
-│   ├── 👤 AccountController.cs    → User auth (register, login, logout, profile)
-│   ├── 🛍️ ProductController.cs    → Browse + search products
-│   ├── 🗂️ CategoryController.cs   → View product categories
-│   ├── 🛒 CartController.cs        → Manage shopping cart
-│   ├── ❤️ WishlistController.cs    → Manage wishlist
-│   └── 📦 OrderController.cs       → Place + view orders
+Wearly-Backend/
 │
-├── 📁 Services/                    → Business logic layer
-│   ├── 📁 Interfaces/              → Service contracts (IAccountService, etc.)
-│   └── 📁 Implementations/         → Service code (AccountService, etc.)
+├── /Controllers/                   # API layer (handles HTTP requests)
+│   ├── AccountController.cs        # User auth (register, login, logout, status)
+│   ├── ProductController.cs        # Product APIs (list, detail, search)
+│   ├── CategoryController.cs       # Category APIs (list, detail)
+│   ├── CartController.cs           # Shopping cart APIs (add, remove, view)
+│   ├── WishlistController.cs       # Wishlist APIs (add, remove, view)
+│   └── …                         # More feature-specific controllers
 │
-├── 📁 Repositories/                → Data access layer (repositories)
-│   ├── 📁 Interfaces/              → Repository contracts
-│   └── 📁 Implementations/         → EF Core repo implementations
+├── /Services/                      # Business logic layer
+│   ├── Interfaces/                 # Service interfaces (contracts)
+│   │   ├── IAccountService.cs
+│   │   ├── IProductService.cs
+│   │   ├── ICategoryService.cs
+│   │   ├── ICartService.cs
+│   │   └── IOrderService.cs
+│   └── Implementations/            # Concrete service implementations
+│       ├── AccountService.cs
+│       ├── ProductService.cs
+│       ├── CategoryService.cs
+│       ├── CartService.cs
+│       └── OrderService.cs
 │
-├── 📁 Models/                      → Domain models (entities)
-│   ├── 👥 Customer.cs             → User entity
-│   ├── 👗 Product.cs             → Product entity
-│   ├── 🗂️ Category.cs            → Category entity
-│   ├── 🛒 CartItem.cs            → Cart item entity
-│   └── 📦 Order.cs               → Order entity
+├── /Repositories/                  # Data access layer (repositories)
+│   ├── Interfaces/                 # Repository interfaces (data contracts)
+│   │   ├── IAccountRepository.cs
+│   │   ├── IProductRepository.cs
+│   │   ├── ICategoryRepository.cs
+│   │   ├── ICartRepository.cs
+│   │   └── IOrderRepository.cs
+│   └── Implementations/            # EF Core repository implementations
+│       ├── AccountRepository.cs
+│       ├── ProductRepository.cs
+│       ├── CategoryRepository.cs
+│       ├── CartRepository.cs
+│       └── OrderRepository.cs
 │
-├── 📁 Data/                        → Database context + migrations
-│   ├── 📄 AppDbContext.cs        → EF Core DbContext
-│   └── 📁 Migrations/            → Database migrations
+├── /Models/                        # Domain models (EF Core entities)
+│   ├── Customer.cs                 # Customer/user entity
+│   ├── Product.cs                  # Product entity
+│   ├── Category.cs                 # Product category entity
+│   ├── CartItem.cs                 # Cart item entity
+│   └── Order.cs                    # Order entity
 │
-├── 📁 Configurations/              → App configs (CORS, Auth, Swagger)
-├── ⚙️ appsettings.json             → Global settings (DB connection, keys)
-├── 🚀 Program.cs                  → App entry point + middleware
-├── 🐳 Dockerfile                  → SQL Server Docker setup
-└── 📝 README.md                   → This documentation
-
+├── /Data/                          # Database context and migrations
+│   ├── AppDbContext.cs             # EF Core DbContext
+│   └── /Migrations/                # Database migration files
+│
+├── /Configurations/                # Application configurations
+│   ├── CorsPolicy.cs               # Cross-Origin setup
+│   ├── AuthenticationConfig.cs     # Auth setup (cookies, sessions)
+│   ├── SwaggerConfig.cs            # Swagger API docs setup
+│   └── …                         # Additional configs
+│
+├── appsettings.json                # Global configuration (DB strings, keys)
+├── Program.cs                      # Application startup + middleware pipeline
+├── Dockerfile                      # Docker container setup (SQL Server)
+└── README.md                       # Documentation
 ---
 
 ## 🏛️ **Layered Architecture**
